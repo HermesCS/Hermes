@@ -14,7 +14,10 @@ export class SidebarComponent {
   @Output() onOpenCollapse = new EventEmitter();
 
   filteredChatContacts: ChatContact[] = [];
+  filteredBySearchChatContacts: ChatContact[] = [];
   isMainSettingsOpen = false;
+
+  searchText = '';
 
   constructor(private chatService: ChatService) {}
 
@@ -23,6 +26,7 @@ export class SidebarComponent {
       next: (res) => {
         this.chatContacts = res;
         this.filteredChatContacts = res;
+        this.filteredBySearchChatContacts = res;
       },
       error: (err) => console.log(err),
     });
@@ -50,6 +54,14 @@ export class SidebarComponent {
         );
       }
     }
+  }
+
+  onSearch(text: string) {
+    this.searchText = text;
+
+    this.filteredBySearchChatContacts = this.filteredChatContacts.filter((contact) =>
+      contact.chatName.toLowerCase().startsWith(this.searchText.toLowerCase())
+    );
   }
 
   openMobileCollapse() {

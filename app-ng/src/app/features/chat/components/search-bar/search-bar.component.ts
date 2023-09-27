@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'SearchBar',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent {
+  @Input() text = '';
+  @Output() textChange = new EventEmitter<string>()
 
+  onSearch() {
+    this.textChange.emit(this.text);
+  }
 }
