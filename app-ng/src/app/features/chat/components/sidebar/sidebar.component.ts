@@ -43,13 +43,20 @@ export class SidebarComponent {
   onChangeFilter(filter: ChatType | null) {
     if (!filter) {
       this.filteredChatContacts = this.chatContacts;
+      this.filteredBySearchChatContacts = this.chatContacts;
     } else {
       if (filter === ChatType.PRIVATE) {
         this.filteredChatContacts = this.chatContacts.filter(
           (contact) => contact.type === ChatType.PRIVATE
         );
+        this.filteredBySearchChatContacts = this.chatContacts.filter(
+          (contact) => contact.type === ChatType.PRIVATE
+        );
       } else {
         this.filteredChatContacts = this.chatContacts.filter(
+          (contact) => contact.type === ChatType.GROUP
+        );
+        this.filteredBySearchChatContacts = this.chatContacts.filter(
           (contact) => contact.type === ChatType.GROUP
         );
       }
