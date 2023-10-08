@@ -15,8 +15,12 @@ export class ChatHeaderComponent implements OnInit, OnDestroy {
   @Input() forContact!: ChatContact
   @Output() onToggleChatSettings = new EventEmitter();
 
-  isOnline: boolean = true;
-  onlinesCount: number = 0;
+  get isOnline(){
+    return this.checkStatus()>0;
+  };
+  get onlinesCount(){
+    return this.checkStatus();
+  };
 
   onlineUsers!: Set<string>;
   subscription!: Subscription;
@@ -45,8 +49,6 @@ export class ChatHeaderComponent implements OnInit, OnDestroy {
   checkStatus = () => {
     const found = this.forContact.members.filter(i => i._id != this.auth.myId);
     let status = found.reduce((a, b) => a + (this.onlineUsers.has(b._id) ? 1 : 0), 0);
-    this.onlinesCount = status;
-    this.isOnline = status > 0;
     return status;
   }
 
