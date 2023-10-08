@@ -16,7 +16,7 @@
         {{ forContact.chatName }}
       </p>
       <p *ngIf="isOnline" class="text-xs">
-        <span *ngIf="forContact.type == 'group'">{{onlinesCount}} Pepele</span>
+        <span *ngIf="forContact.type == 'group'">{{onlinesCount}} People</span>
         <span *ngIf="forContact.type == 'private'">Online</span>
       </p>
       <p *ngIf="!isOnline" class="text-xs">Offline</p>
